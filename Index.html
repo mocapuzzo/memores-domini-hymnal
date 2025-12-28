@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memores Domini Hymnal - Los Angeles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #F7F3E9 0%, #EDE8DC 100%);
+      color: #2C2416;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .cross-icon {
+      font-size: 32px;
+      color: #8B7355;
+      margin-bottom: 16px;
+    }
+    
+    .title {
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: #3D3426;
+      margin: 0 0 8px 0;
+      text-transform: uppercase;
+    }
+    
+    .subtitle {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: #6B5B4D;
+      margin: 0;
+      letter-spacing: 0.05em;
+    }
+    
+    .divider {
+      margin-top: 24px;
+      font-size: 24px;
+      color: #C9A962;
+    }
+    
+    /* Sections */
+    .section {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #3D3426;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #D4C9B9;
+      padding-bottom: 12px;
+    }
+    
+    .section-icon {
+      font-size: 1.25rem;
+    }
+    
+    /* Tiles Grid */
+    .tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    
+    .tiles-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .day-section {
+      margin-bottom: 24px;
+    }
+    
+    .day-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #5D5346;
+      margin-bottom: 12px;
+      padding-left: 8px;
+      border-left: 3px solid #C9A962;
+    }
+    
+    /* Tiles */
+    .tile {
+      background: linear-gradient(135deg, #FFFFFF 0%, #FAF8F3 100%);
+      border: 2px solid #D4C9B9;
+      border-radius: 8px;
+      padding: 20px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      min-height: 100px;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .tile-small {
+      min-height: 80px;
+      padding: 14px 16px;
+      flex: 0 1 auto;
+      min-width: 140px;
+    }
+    
+    .tile-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #3D3426;
+      line-height: 1.3;
+    }
+    
+    .tile-time {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #3D3426;
+    }
+    
+    .tile-subtitle {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #7A6E5D;
+    }
+    
+    .tile-tiny-subtitle {
+      font-size: 0.75rem;
+      font-style: italic;
+      color: #7A6E5D;
+    }
+    
+    .tile-language {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9B8C7A;
+      background: #F0EBE0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+    
+    /* Category Colors */
+    .tile-daily { border-color: #C9A962; }
+    .tile-weekly { border-color: #8B7355; }
+    .tile-night { border-color: #4A5568; }
+    .tile-seasonal { border-color: #5D7E3E; }
+    .tile-prayers { border-color: #9B4E4E; }
+    .tile-special { border-color: #6B5B7B; }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #D4C9B9;
+    }
+    
+    .footer-divider {
+      font-size: 20px;
+      color: #C9A962;
+      margin-bottom: 12px;
+    }
+    
+    .footer-text {
+      font-size: 0.9rem;
+      color: #7A6E5D;
+      letter-spacing: 0.1em;
+    }
+    
+    /* Hymn Page */
+    .hymn-page {
+      display: none;
+    }
+    
+    .hymn-page.active {
+      display: block;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .home-page.hidden {
+      display: none;
+    }
+    
+    .back-button {
+      background: none;
+      border: none;
+      color: #8B7355;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 8px 0;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    
+    .back-button:hover {
+      color: #5D4E3A;
+    }
+    
+    .hymn-content {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      padding: 48px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hymn-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #D4C9B9;
+    }
+    
+    .hymn-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 600;
+      color: #3D3426;
+      margin: 0 0 8px 0;
+    }
+    
+    .hymn-subtitle {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #6B5B4D;
+      margin: 0 0 8px 0;
+    }
+    
+    .hymn-language {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #9B8C7A;
+      background: #F0EBE0;
+      padding: 4px 12px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    
+    .hymn-meta {
+      font-size: 0.95rem;
+      color: #7A6E5D;
+      margin: 8px 0 0 0;
+    }
+    
+    .hymn-body {
+      line-height: 1.8;
+    }
+    
+    .antiphon {
+      background: linear-gradient(135deg, #FAF8F3 0%, #F5F0E6 100%);
+      border: 1px solid #E5DED0;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    
+    .antiphon-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #9B8C7A;
+      margin-bottom: 8px;
+    }
+    
+    .antiphon-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #4A4239;
+      margin: 0;
+    }
+    
+    .verses {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .verse {
+      font-size: 1.1rem;
+      color: #2C2416;
+      margin: 0;
+      text-align: center;
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+    
+    .translation {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #D4C9B9;
+    }
+    
+    .translation-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #9B8C7A;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    
+    .translation-text {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #5D5346;
+      line-height: 1.8;
+      text-align: justify;
+      margin: 0;
+    }
+    
+    .rosary-section {
+      background: #FAF8F3;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+    
+    .rosary-section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #4A4239;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    
+    .mystery-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .mystery-item {
+      font-size: 1rem;
+      color: #3D3426;
+      text-align: center;
+      padding: 4px 0;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 24px 16px;
+      }
+      
+      .section {
+        padding: 24px 16px;
+      }
+      
+      .hymn-content {
+        padding: 32px 20px;
+      }
+      
+      .tiles-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Home Page -->
+    <div id="homePage" class="home-page">
+      <header class="header">
+        <div class="cross-icon">✝</div>
+        <h1 class="title">Memores Domini</h1>
+        <p class="subtitle">Los Angeles Hymnal</p>
+        <div class="divider">❧</div>
+      </header>
+      
+      <main id="mainContent">
+        <!-- Content will be dynamically generated -->
+      </main>
+      
+      <footer class="footer">
+        <div class="footer-divider">✝</div>
+        <p class="footer-text">Memores Domini · Los Angeles</p>
+      </footer>
+    </div>
+    
+    <!-- Hymn Page -->
+    <div id="hymnPage" class="hymn-page">
+      <button class="back-button" onclick="goHome()">← Back to Hymnal</button>
+      <article class="hymn-content" id="hymnContent">
+        <!-- Content will be dynamically generated -->
+      </article>
+    </div>
+  </div>
+  
+  <script>
+    const hymnsData = {
+      benedictus: {
+        title: "Benedictus",
+        subtitle: "Luke 1, 68–79",
+        category: "daily",
+        antiphon: "Lo, I am always with you, through the ages, unto the end of the world. Hallelujah.",
+        verses: [
+          "Blessed be the Lord, the God of Israel! *\nHe has visited his people and redeemed them.",
+          "He has raised up for us a mighty saviour *\nin the house of David his servant,",
+          "as he promised by the lips of holy men *\nthose who were his prophets from of old.",
+          "A saviour who would free us from our foes, *\nfrom the hands of all who hate us.",
+          "So his love for our fathers is fulfilled *\nand his holy covenant remembered.",
+          "He swore to Abraham our father to grant us, *\nthat free from fear, and saved from the hands of our foes,\nwe might serve him in holiness and justice *\nall the days of our life in his presence.",
+          "As for you, little child, *\nyou shall be called a prophet of God, the Most High.",
+          "You shall go ahead of the Lord *\nto prepare his ways before him,",
+          "To make known to his people their salvation *\nthrough forgiveness of all their sins,",
+          "the loving-kindness of the heart of our God *\nwho visits us like the dawn from on high.",
+          "He will give light to those in darkness, †\nthose who dwell in the shadow of death, *\nand guide us into the way of peace."
+        ]
+      },
+      angelus: {
+        title: "Angelus",
+        category: "prayers",
+        verses: [
+          "V/ The angel of the Lord declared unto Mary.\nR/ And she conceived by the Holy Spirit.",
+          "V/ Behold the handmaid of the Lord;\nR/ Be it done unto me according to thy word.",
+          "V/ And the Word was made flesh\nR/ And dwells among us.",
+          "Hail Mary, full of Grace!\nThe Lord is with thee;\nBlessed art thou among women,\nAnd blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\nPray for us sinners,\nNow and at the hour of our death. Amen.",
+          "V/ Pray for us, O holy Mother of God.\nR/ That we may be made worthy of the promises of Christ.",
+          "V/ Let us pray:\nPour forth, we beseech Thee, O Lord, Thy grace into our hearts, that we to whom the incarnation of Christ Thy Son was made known by the message of an angel, may by His passion and death be brought to the glory of His resurrection. Through Christ our Lord.\nR/ Amen.",
+          "V/ Glory be to the Father …\nV/ Veni Sancte Spiritus,\nR/ Veni per Mariam."
+        ]
+      },
+      reginaCaeli: {
+        title: "Regina Caeli",
+        category: "prayers",
+        language: "Latin",
+        verses: [
+          "V/ Regina caeli, laetare, alleluia.\nR/ Quia quem meruisti portare, alleluia.",
+          "V/ Resurrexit sicut dixit, alleluia.\nR/ Ora pro nobis Deum, alleluia.",
+          "V/ Gaude et laetare, Virgo Maria, alleluia.\nR/ Quia surrexit Dominus vere, alleluia.",
+          "V/ Oremus:\nDeus, qui per resurrectionem Filii tui Domini nostri Jesu Christi mundum universum laetificare dignatus es, praesta, quaesumus, ut per eius Genitricem Virginem Mariam perpetuae capiamus gaudia vitae. Per Christum Dominum nostrum.\nR/ Amen.",
+          "V/ Gloria Patri, et Filio, et Spiritui Sancto,\nR/ Sicut erat in principio et nunc et semper, et in saecula saeculorum. Amen."
+        ]
+      },
+      benedictusVitorchiano: {
+        title: "Benedictus",
+        subtitle: "(Vitorchiano)",
+        category: "daily",
+        language: "Italian",
+        antiphon: "Ecco, io sono con voi, tutti i giorni fino alla fine del mondo. Alleluia.",
+        verses: [
+          "Benedetto il Signore, il Dio d'Israele\nche ha visitato e redento il suo popolo.",
+          "Per noi ha suscitato una forza di salvezza\nnella casa di Davide suo servo,",
+          "come ha parlato un tempo\nper bocca dei suoi santi profeti.",
+          "Salvezza dai nostri nemici\ne dalla mano di tutti quelli che ci odiano,\nper fare misericordia con i nostri padri\ne ricordarsi del suo patto santo.",
+          "Promessa che ha giurato ad Abramo, nostro padre,\ndi concedere che noi, senza timore,\nliberati dalla mano dei nemici,\nlo serviamo in santità e giustizia,\ndinnanzi a lui in tutti i nostri giorni.",
+          "E tu, o bambino, sarai chiamato\nprofeta dell'Altissimo:\ncamminerai di fronte al Signore,\na preparare le sue vie.",
+          "Per far conoscere la salvezza al suo popolo,\nnel perdono dei loro peccati,\ncon le viscere di pietà del nostro Dio\nnelle quali ci visiterà,\nOriente dall'alto.",
+          "A manifestarsi a chi siede nelle tenebre\ne nell'ombra di morte,\na dirigere i nostri piedi\nin una via di pace.",
+          "Sia gloria al Padre, al Figlio,\nallo Spirito Santo,\na chi era, è e sarà\nnei secoli il Signore."
+        ]
+      },
+      magnificatVitorchiano: {
+        title: "Magnificat",
+        subtitle: "(Vitorchiano)",
+        category: "daily",
+        language: "Italian",
+        antiphon: "Tu sei la luce che mai non si spegne, dimora di colui che non ha tetto, Madre e Vergine.",
+        verses: [
+          "L'anima mia magnifica il Signore,\ne si allieta il mio spirito in Dio, mio Salvatore,",
+          "poiché ha guardato alla miseria della sua serva:\ne ora tutti i secoli mi diranno beata;",
+          "poiché il Potente mi ha fatto grandi cose,\ne santo è il suo nome;",
+          "e il suo amore per secoli e secoli\na coloro che lo temono.",
+          "Egli opera potenza col suo braccio,\ndisperde i superbi nell'intento del loro cuore;",
+          "abbatte i potenti dai troni\ne innalza i miseri;",
+          "gli affamati li riempie di beni,\ne i ricchi li svuota;",
+          "solleva Israele, suo servo,\nricordando il suo amore.",
+          "Così ha parlato ai nostri padri,\nper Abramo e la sua discendenza, nei secoli.",
+          "Sia gloria al Padre onnipotente,\nal Figlio, allo Spirito Santo. Amen."
+        ]
+      },
+      sundayMorning: {
+        title: "Sunday Morning",
+        category: "weekly",
+        day: "Sunday",
+        time: "Morning",
+        verses: [
+          "The morn dawns refulgent with glory,\nThe heavens are vested in song,\nThe earth echoes forth hymns of gladness\nTo Christ, who has risen from death.",
+          "Death's power is vanquished by life,\nAnd sin has been washed clean by Love,\nAnd Christ in His glorious splendour\nIllumines the advent of morning.",
+          "The darkness of night has now broken,\nThe morn comes resplendent with light;\nOur souls overflowing with joy\nRejoice that in Him we are brothers.",
+          "May Christ show Himself in His glory\nTo us, as unto Mary Magdalene,\nHe'll come and call each one by name,\nThe Lord who was dead, but has risen.",
+          "Return, O Lord, to our path,\nYour words set ablaze in our hearts;\nOnce more in the Bread that is broken\nYour risen face will be revealed.",
+          "When into one body we gather,\nA new Guest appears in our midst;\nOur faith may He strengthen anew,\nRevealing His glorious wounds.",
+          "This day of our Easter rejoicing,\nOur innocence He will renew.\nAll glory to Christ, our Redeemer,\nTo Father and Spirit for ever. Amen."
+        ]
+      },
+      sundayEvening: {
+        title: "Sunday Evening",
+        category: "weekly",
+        day: "Sunday",
+        time: "Evening",
+        verses: [
+          "Blessed Trinity eternal,\nWe sing Your glory in this evening prayer.\nIn Christ, our Lord, You've fashioned us Your children,\nWithin our hearts You've taken up Your dwelling.",
+          "O Infinite, O Timeless,\nO Source of life o'er which death has no hold.\nCreation surges back to You, its Maker,\nReturning in unceasing streams of love.",
+          "To You, we raise our voices\nAs twilight brings an end to this brief Sabbath,\nWhich heralds that eternal day of glory\nWhen we shall see Your face, our living light.",
+          "To You, we offer praises,\nO sweet and blessed Trinity divine,\nWhose living waters pour out o'er the ages\nWithin the sea of Your unending love.\nAmen."
+        ]
+      },
+      mondayMorning: {
+        title: "Monday Morning",
+        category: "weekly",
+        day: "Monday",
+        time: "Morning",
+        verses: [
+          "As daylight breaks o'er the new morning\nResplendent in light and in silence,\nCreation awakens from darkness\nAs happened when earth was created.",
+          "And we who keep watch through the night\nWhile minding the faith of our brothers,\nAwaiting the coming of Christ, we\nAre seeking the light of our lives.",
+          "O Christ, only Son of the Father,\nO Jesus, divine light from heaven,\nIn You, we are vested in hope,\nAbiding in joy and in love.",
+          "O Father, we praise You for ever\nWith Jesus, Your Son, our true light,\nWe glorify Your Holy Spirit\nFor ever and ever. Amen."
+        ]
+      },
+      mondayEvening: {
+        title: "Monday Evening",
+        category: "weekly",
+        day: "Monday",
+        time: "Evening",
+        verses: [
+          "The first word that came forth was light,\nSupreme and sublime its Creator,\nAttendant with light was creation,\nAnd thus time was set into motion.",
+          "The evening descends on our prayer,\nDawn's glimmer gives way to dusk's glow,\nThe heavens emblazoned with fire\nProclaim to the earth Your great glory.",
+          "New yearning for life is awakened,\nImbuing the earth with its fervour,\nAll life raised in search of its Maker\nWill rest in contentment and peace.",
+          "The peace that for us is most true\nWe find in Your Son, Jesus Christ,\nWho raised high from earth, arms outstretched,\nRecalls all things unto Himself.",
+          "Christ Jesus, man's Pastor eternal,\nYou show us the way to safe passage,\nThrough darkness engulfing the world\nTo fresh, verdant pastures of life.",
+          "With gladness, we offer new hymns\nTo Jesus, the gift of Your love.\nMay glory be Yours, blessed Father\nAnd praise unto Your Holy Spirit.\nAmen."
+        ]
+      },
+      tuesdayMorning: {
+        title: "Tuesday Morning",
+        category: "weekly",
+        day: "Tuesday",
+        time: "Morning",
+        verses: [
+          "O Lord, our eternal Creator\nYou alternate nighttime with daylight\nAnd thus You grant rest to Your people\nAs time slowly moves on its way.",
+          "The night is now ending its journey\nIn silence all things are enfolded\nWe waken to sing out Your praises\nAnd pray in sincere expectation.",
+          "These hours of the morning are vital:\nMay hope come anew to the suff'ring\nMay evil and guilt be washed clean\nAnd dawn make our hearts ever purer.",
+          "May waiting for daybreak unite us\nAs brothers redeemed in Christ Jesus\nMay faith make us stronger and fervent\nAnd sing in our hearts of new hope.",
+          "Let's sing out in praise to the Father\nAnd so to the Son, Light from Light,\nAnd glory and praise to the Spirit\nEternal blest source of all life.\nAmen."
+        ]
+      },
+      tuesdayEvening: {
+        title: "Tuesday Evening",
+        category: "weekly",
+        day: "Tuesday",
+        time: "Evening",
+        verses: [
+          "O God, who with Your brightness\nDoth weave each morning's daylight,\nAccept our song and praises\nAs quiet fills our vespers.",
+          "The sun is slowly setting,\nSo distant the horizon;\nWhile restfulness and silence\nEnfold our earthly weariness.",
+          "May minds remain unclouded\nWithin this night of evil,\nBut rather let them gladly\nReflect Your radiant face.",
+          "Now may our voice proclaim You,\nOur hearts break out in singing,\nOne Godhead in three persons\nMay You our spirits worship.\nAmen."
+        ]
+      },
+      wednesdayMorning: {
+        title: "Wednesday Morning",
+        category: "weekly",
+        day: "Wednesday",
+        time: "Morning",
+        verses: [
+          "Immersed in the fullness of mystery\nWhich animates all of creation\nLet's sing at the dawn of this morning\nThe infinite glow of the Father.",
+          "May light which is slowly transforming\nThe shadowy darkness of evil\nAwaken anew in all hearts\nA hope for that daylight unending.",
+          "The morn bathes all things with its brightness\nRevealing new life at inception\nThe seal of the triumph eternal\nIn Christ who has risen from death.",
+          "We praise You, God, giver of life,\nWe praise, too, the Son, light from light,\nAnd glory in kind to the Spirit\nEnkindling our lives with His splendor.\nAmen."
+        ]
+      },
+      wednesdayEvening: {
+        title: "Wednesday Evening",
+        subtitle: "Veni Sancte Spiritus",
+        category: "weekly",
+        day: "Wednesday",
+        time: "Evening",
+        language: "Latin",
+        verses: [
+          "Veni Sancte Spiritus,\net emitte caelitus\nlucis tuae radium.",
+          "Veni pater pauperum,\nveni dator munerum,\nveni lumen cordium.",
+          "Consolator optime,\ndulcis hospes animae,\ndulce refrigerium.",
+          "In labore requies,\nin aestu temperies,\nin fletu solatium.",
+          "O lux beatissima,\nreple cordis intima\ntuorum fidelium.",
+          "Sine tuo numine,\nnihil est in homine,\nnihil est innoxium.",
+          "Lava quod est sordidum,\nriga quod est aridum,\nsana quod est saucium.",
+          "Flecte quod est rigidum,\nfove quod est frigidum,\nrege quod est devium.",
+          "Da tuis fidelibus\nin Te confidentibus,\nsacrum septenarium.",
+          "Da virtutis meritum,\nda salutis exitum,\nda perenne gaudium. Amen."
+        ],
+        translation: "1. Come, Holy Spirit, and send a ray of your light from Heaven. 2. Come, O Father of the poor, come, dispenser of all good, come, light of hearts. 3. Total consolation, sweet guest of the soul, gentle refreshment. 4. Rest in our weariness, relief of our thirst, comfort in our sadness. 5. O blessed light, fill to the brim the hearts of the faithful. 6. Without your help, there is nothing good in man, nothing that does not do him harm. 7. Purify what is unclean, water what is arid, heal what is wounded. 8. Bend what is rigid, warm what is cold, correct what is wrong. 9. Give your faithful who trust in you your seven holy gifts. 10. Give the prize of virtue, open the door of salvation, give us eternal joy."
+      },
+      thursdayMorning: {
+        title: "Thursday Morning",
+        category: "weekly",
+        day: "Thursday",
+        time: "Morning",
+        verses: [
+          "Before the break of daylight\nWe fervently keep vigil,\nA hush befalls creation;\nIn silence sings the Myst'ry.",
+          "Our watchful eyes are seeking\nA Face within the darkness,\nOur hearts pour forth desires\nNow cleansed and raised to God.",
+          "The shadows 'round dispersing,\nThe light of day transcending,\nOur hope for days unending\nNow blossoms with the dawn.",
+          "And soon, the swell of morning\nWill drench us in its sunlight.\nO Father, in Your mercy,\nBestow unto us life.",
+          "We ask that on this new day\nWhich dawn has set in motion,\nThe Kingdom of Christ Jesus\nBe spread throughout the earth.",
+          "To You, O blessed Father,\nYour Word made flesh, our Saviour,\nYour endless love, the Spirit,\nMay praise be Yours for ever.\nAmen."
+        ]
+      },
+      thursdayEvening: {
+        title: "Thursday Evening",
+        subtitle: "Jesu dulcis memoria",
+        category: "weekly",
+        day: "Thursday",
+        time: "Evening",
+        language: "Latin",
+        verses: [
+          "Jesu dulcis memoria,\ndans vera cordis gaudia:\nsed super mel et omnia,\nEjus dulcis praesentia.",
+          "Nil canitur suavius,\nnil auditur jucundius,\nnil cogitatur dulcius\nquam Jesus Dei Filius.",
+          "Jesu, spes paenitentibus,\nquam pius es petentibus,\nquam bonus Te quaerentibus!\nsed quid invenientibus?",
+          "Nec lingua valet dicere,\nnec littera exprimere:\nexpertus potest credere\nquid sit Jesum diligere.",
+          "Sis, Jesu, nostrum gaudium,\nqui es futurus praemium:\nsit nostra in Te gloria\nper cuncta semper saecula. Amen."
+        ],
+        translation: "1. Sweet is the memory of Jesus, giving joy to the heart. But sweeter even than honey is His presence. 2. There is nothing sung that is sweeter, nothing heard that is more pleasant, no thought that is dearer than Jesus, God's Son. 3. Jesus, hope for penitents, how tender You are for seekers, when You are asked for. But greater still, when You are found! 4. Tongue cannot say, words cannot express; only he who has experienced Him can believe what it is to love Jesus. 5. Be Thou Jesus, our joy, You who are going to be our reward. May we have great glory in You for all ages."
+      },
+      fridayMorning: {
+        title: "Friday Morning",
+        category: "weekly",
+        day: "Friday",
+        time: "Morning",
+        verses: [
+          "O Christ in Your splendour divine,\nYou rouse us from slumber to life,\nEnrobing the world with Your radiance\nAnd off'ring us up to the Father.",
+          "We ask that the grace of this morning\ntransform the earth into an altar,\nthus making the works of Your children\nan off'ring of praise to Your glory.",
+          "Your sacrament given Your people\nWill nourish our souls with Your life;\nOur hearts will be merged in communion\nIn Your Church, the mystical body.",
+          "The heavens reflect Your great splendour\nAnd time urges on at Your word;\nO Christ in Your goodness, You lead us\nInto that day without sunset.",
+          "O Jesus, true light of the world,\nO Father, blest source of all light,\nO Spirit, the light of love,\nMay glory be Yours on this morning.\nAmen."
+        ]
+      },
+      fridayEvening1: {
+        title: "Friday Evening (1)",
+        subtitle: "Ti adoro, Redentore",
+        category: "weekly",
+        day: "Friday",
+        time: "Evening",
+        language: "Italian",
+        verses: [
+          "Ti adoro, Redentore,\ndi spine incoronato,\nper ogni peccatore\na morte condannato.",
+          "Ti adoro, Gesù buono,\nschernito, schiaffeggiato,\nTu doni il tuo perdono\na chi ti ha flagellato.",
+          "Ti adoro, Gesù pio,\nin croce immolato,\nripenso nel cuor mio\nche Tu mi hai tanto amato.\nAmen."
+        ],
+        translation: "1. I adore You, Redeemer, Crowned with thorns, Condemned to death For each sinner. 2. I adore You, good Jesus, Mocked, slapped, You grant Your pardon To those who whipped You. 3. I adore You, holy Jesus, Nailed to the cross. In my heart, I think of how much You have loved me."
+      },
+      fridayEvening2: {
+        title: "Friday Evening (2)",
+        subtitle: "Tu nuda radice divelta",
+        category: "weekly",
+        day: "Friday",
+        time: "Evening",
+        language: "Italian",
+        verses: [
+          "Tu nuda radice divelta\ndall'arido suolo riarso,\nci mostri il Tuo volto sconvolto\ndal lungo patir per amore.",
+          "Tu solo, o Santo che soffri,\nTi carichi il nostro dolore\ne fai che in Te ora divenga\nfecondo per sempre di gloria.",
+          "Dal cuore di pietra dell'uomo\nsgorghi una fonte di pianto:\nne lavi le colpe segrete,\nlo renda capace d'amore",
+          "O Cristo, fratello che soffri,\naccogli la lode perenne\ndi chi in Te ora può dire\n\"Padre\" al Santo dei Santi.\nAmen."
+        ]
+      },
+      saturdayMorning: {
+        title: "Saturday Morning",
+        subtitle: "Omni die, dic Mariae",
+        category: "weekly",
+        day: "Saturday",
+        time: "Morning",
+        language: "Latin",
+        verses: [
+          "Omni die, dic Mariae\nmea laudes anima;\nejus festa, ejus gesta\ncole splendidissima.",
+          "Pulchra tota, sine nota\ncujuscumque maculae,\nfac me mundum et jucundum\nTe laudare sedule.",
+          "Ut sim castus et modestus,\ndulcis, blandus, sobrius,\npius, rectus, circumspectus,\nsimultatis nescius.",
+          "Eruditus et munitus\ndivinis eloquiis,\ntimoratus et ornatus\nsacris exercitiis.",
+          "Virgo sancta, cerne quanta\nperferamus jugiter\ntentamenta et sustenta\nnos ut stemus fortiter.",
+          "Esto tutrix et adiutrix\nchristiani populi;\npacem praesta, ne molesta\nnos perturbent saecula. Amen."
+        ],
+        translation: "1. O my soul, sing the praises of Mary every day, venerate her feast days and her splendid actions. 2. O beautiful and spotless, make me clean and pleasing so that I may praise you diligently. 3. May I be chaste, modest, sweet, pleasant, sober, devout, just, cautious and without animosity on my mind. 4. May I be educated in the Word of God and strengthened by it, reverential and adorned of holy devotions. 5. Holy Virgin, see how we constantly suffer temptations, and sustain us so that we may remain firm. 6. Grant then, o guardian and helper of the Christian people, peace, and may worldly things not unsettle us."
+      },
+      saturdayEvening: {
+        title: "Saturday Evening",
+        category: "weekly",
+        day: "Saturday",
+        time: "Evening",
+        verses: [
+          "Blessed Trinity eternal,\nWe sing Your glory in this evening prayer.\nIn Christ, our Lord, You've fashioned us Your children,\nWithin our hearts You've taken up Your dwelling.",
+          "O Infinite, O Timeless,\nO Source of life o'er which death has no hold.\nCreation surges back to You, its Maker,\nReturning in unceasing streams of love.",
+          "To You, we raise our voices\nAs twilight brings an end to this brief Sabbath,\nWhich heralds that eternal day of glory\nWhen we shall see Your face, our living light.",
+          "To You, we offer praises,\nO sweet and blessed Trinity divine,\nWhose living waters pour out o'er the ages\nWithin the sea of Your unending love.\nAmen."
+        ]
+      },
+      daytimePrayer: {
+        title: "Daytime Prayer",
+        subtitle: "Sunday through Friday",
+        category: "daily",
+        verses: [
+          "Unchanging, everlasting God,\nBlest source of all eternal life.\nWithin the stillness of Your peace\nThe order of the earth unfolds.",
+          "Grant us Your truth, Your radiant light.\nProtect us in our waking hours.\nAnd when the sun's glow burns the sky,\nLet hearts be merged into Your love.",
+          "With hearts as one we glorify\nThe Father, Son and Spirit blest.\nSo as it was so now it is,\nSo shall it be for evermore.\nAmen."
+        ]
+      },
+      daytimePrayerSaturday: {
+        title: "Daytime Prayer Saturday",
+        subtitle: "Ave, maris stella",
+        category: "daily",
+        language: "Latin",
+        verses: [
+          "Ave, maris stella, Dei Mater alma\natque semper virgo, felix caeli porta.",
+          "Sumens illud ave, Gabrielis ore,\nfunda nos in pace, mutans Evae nomen.",
+          "Solve vincla reis, profer lumen caecis,\nmala nostra pelle, bona cuncta posce.",
+          "Monstra te esse matrem, sumat per te preces\nqui, pro nobis natus, tulit esse tuus.",
+          "Virgo singularis, inter omnes mitis,\nnos, culpis solutos, mites fac et castos.",
+          "Vitam praesta puram, iter para tutum,\nut videntes Jesum, semper collaetemur.",
+          "Sit laus Deo Patri, summo Christo decus,\nSpiritui Sancto, tribus honor unus.\nAmen."
+        ],
+        translation: "1. Hail, O star of the sea, nurturing mother of God, and ever virgin, blessed gate to heaven. 2. Receiving that ave (hail) from the mouth of Gabriel, establish us in peace, transforming the name of Eva (Eve). 3. Loosen the chains of the guilty, give sight to the blind, drive out all evil from us, entreat (for us) all good things. 4. Show yourself to be a mother, may He receive (our) prayers He who was born for us, took on your being. 5. O unique Virgin, meek above all others, make us, who are absolved from sins, meek and chase. 6. Bestow a pure life, prepare a safe path, so that when we will see Jesus, we may ever rejoice. 7. Praise be to God the Father, glory be to Christ the most high and to the Holy Spirit, to the Three, be one honour."
+      },
+      confiteor: {
+        title: "Confiteor",
+        subtitle: "(Night Prayer)",
+        category: "night",
+        verses: [
+          "V/ Before the close of day, let us call to mind our sins.\nI confess,",
+          "R/ to Almighty God\nand to you, my brothers and sisters\nthat I have greatly sinned,\nin my thoughts and in my words,\nin what I have done and in what I have failed to do,\nthrough my fault, through my fault,\nthrough my most grievous fault;\ntherefore I ask blessed Mary, ever-Virgin,\nall the angels and saints,\nand you, my brothers and sisters,\nto pray for me to the Lord our God.",
+          "V/ May Almighty God have mercy on us,\nforgive us our sins, and bring us to everlasting life.\nR/ Amen."
+        ]
+      },
+      nightPrayer: {
+        title: "Night Prayer",
+        subtitle: "Sunday through Friday",
+        category: "night",
+        verses: [
+          "Now that the day has run its course\nO blest Creator of mankind,\nIllumine our expectant night\nAnd wake us in eternal light.",
+          "Keep vigil o'er our sleep this night\nWe ask of Your sweet tenderness.\nRelease our weary bodies from\nTemptations of the evil one.",
+          "O hear us, God omnipotent,\nDeliver us, O Christ our Lord,\nWho, with the Holy Spirit reigns\nIn glory through eternity. Amen."
+        ]
+      },
+      nightPrayerSaturday: {
+        title: "Night Prayer Saturday",
+        subtitle: "O spes mea cara",
+        category: "night",
+        language: "Latin",
+        verses: [
+          "O spes mea cara, Maria praeclara,\ne valle amara imploro Te.\nExaudi praecantem, solare clamantem,\nconfirma labantem, et serva me.",
+          "Per blanda perdura, ad non peritura,\no fortis, o pura duc debilem.\nDum turget procella et suscitat bella\nad portum, o stella, duc exulem.",
+          "Patrona decora, in exitus hora\npro me, Mater, ora tuum Filium\nut inserar gratis, remissis peccatis,\ncatervis beatis coelestium."
+        ],
+        translation: "1. O my dear hope, splendid Mary, from this bitter valley I implore you. As I am praying, listen to me; as I am crying, console me; as I am about to fall, strengthen me, and protect me. 2. Amid life's enticements stay with me, and lead me, who am weak, to the imperishable goods, you who are strong and pure. When a heavy storm arises and provokes wars, then, O star, lead me, who am exiled, to safe haven. 3. Gracious advocate, in the hour of my passing pray for me, o Mother, to your Son that I may join gratuitously, my sins forgiven, the ranks of the blessed in heaven."
+      },
+      memorare: {
+        title: "Memorare",
+        category: "prayers",
+        language: "Latin & English",
+        verses: [
+          "Memorare,\npiissima virgo Maria,\na saeculo non esse auditum\nquemquam ad tua currentem praesidia,\ntua implorantem auxilia,\ntua petentem suffragia\nesse derelictum.",
+          "Ego, tali animatus confidentia,\nad te, virgo virginum mater, curro;\nad te venio,\ncoram te gemens peccator assisto.\nNoli, mater Verbi, verba mea despicere,\nsed audi propitia et exaudi. Amen."
+        ],
+        translation: "Remember, O most gracious Virgin Mary, That never was it known That anyone who fled to Thy protection, Implored Thy help, And sought Thy intercession Was left unaided. Inspired with this confidence, I fly unto Thee, O Virgin of virgins, My Mother! To Thee I come, Before Thee I stand, sinful and sorrowful. O Mother of the Word incarnate! Despise not my petitions, But, in Thy mercy, Hear and answer me. Amen."
+      },
+      adventMorning: {
+        title: "Advent Morning Hymn",
+        category: "seasonal",
+        season: "Advent",
+        verses: [
+          "Let us lift up our eyes to the heav'ns,\nThe salvation of God is at hand!\nAnd awaken all hearts from their slumber\nTo welcome the King of glory.",
+          "He will rise from the House of David,\nThe Messiah invoked by us all.\nHis frail flesh will He take from a Virgin\nBy pow'r of the Holy Spirit.",
+          "Quickly come, King and bearer of peace!\nAnd to earth bring forth God's tender smile!\nFor no man has e'er gazed on His face:\nThrough You is revealed this Myst'ry.",
+          "Come to us, Jesus Lord we Thee pray\nAnd to us grant the fullness of God.\nYou have offered Your Body and Blood\nTo save us from our transgressions.",
+          "We are sure that upon Judgment Day\nYou will come forth in pow'r and in splendor\nYou will praise the elected in heaven,\nAnd punish with fire the wicked.",
+          "On that day, may we look on in peace\nAt Your face in its radiant glory;\nMay we follow where You reign in heaven\nWith Father and Spirit for ever.\nAmen."
+        ]
+      },
+      adventEvening1: {
+        title: "Advent Evening Hymn (1)",
+        subtitle: "Risplenda nella notte",
+        category: "seasonal",
+        season: "Advent",
+        language: "Italian",
+        verses: [
+          "Risplenda nella notte una gran luce,\ndiscenda nel deserto la rugiada,\ngetti virgulti il ceppo inaridito\ne germini la terra il Salvatore.",
+          "Esulta d'allegrezza, o tu che piangi,\nperché il tuo Dio sta per venirti incontro;\nalto risuona un grido nel deserto:\n\"La strada preparate al Dio che viene!\".",
+          "Al lungo desiderio delle genti\nrisponderà un Dio fatto bambino,\ne nascerà dal grembo di una donna\nColui che regge tutto l'universo.",
+          "Il mondo intero è vigile, in attesa\nche l'ombra della notte si diradi;\nalzate il vostro capo e contemplate:\nall'orizzonte già si leva Cristo.",
+          "A Lui, che è il vero sole di giustizia\ncantiamo nell'avvento della vita,\ndesiderando l'ultimo ritorno\nche tutti ci consumi nell'Amore. Amen."
+        ],
+        translation: "1. A great light shines in the night, dew descends in the desert, the dried out stump brings forth shoots, and the Saviour germinates the earth. 2. O you who cry, exult in joy, because your God comes to find you; a cry breaks out in the desert: prepare a path for God who is coming! 3. A God made child will respond to the long-awaited desire of the people, and from the womb of a woman will be born He who rules the entire universe. 4. The whole world is vigilant in waiting for the shadows of night to clear up; raise your head and contemplate: Jesus is already seen on the horizon. 5. To He who is the true sun of justice, we sing in the advent of life, desiring the final return so that everyone be consumed in Love."
+      },
+      adventEvening2: {
+        title: "Advent Evening Hymn (2)",
+        subtitle: "Raggiante fra tenebre dense",
+        category: "seasonal",
+        season: "Advent",
+        language: "Italian",
+        verses: [
+          "Raggiante fra tenebre dense,\nviene tra noi Gesù, la luce vera;\ncammineran le genti al suo fulgore,\na Lui si volgeranno con amore.",
+          "La via prepariamo per Lui,\nesulteremo innanzi al nostro Dio,\nche viene a noi qual fonte di salvezza,\nche viene a noi con equità ed amore.",
+          "Venuto a redimere l'uomo,\nl'attira a sé con umiltà e mitezza;\nla fedeltà e la grazia manifesta,\npresente in mezzo a noi sarà per sempre.",
+          "Ai poveri porta l'annunzio:\nsaranno i primi nel regno dei cieli,\nsaran chiamati popolo di Dio,\nfarà con loro un'alleanza eterna.",
+          "Un giorno avrà fine l'attesa:\nsaranno cieli nuovi e terra nuova!\nDice il Signore: \"Ecco, vengo presto!\"\nDice la sposa: \"Sì, vieni, Signore!\". Amen."
+        ],
+        translation: "1. Glowing among the dense gloom, come among us, Jesus, true light; the people will walk in His splendour, to Him they will turn with love. 2. For Him we will prepare a way, from now on we will exalt our God who comes to us, spring of salvation, who comes to us with fairness and love. 3. Come to redeem man, with humility and meekness He draws all things unto Himself; faithfulness and grace are manifest, present among us for ever. 4. To the poor He brings the announcement: they will be first in the Kingdom of Heaven; they will be called people of God; He will Make an eternal covenant with them. 5. One day the waiting will end. There will be a new heavens and a New earth! Says the Lord: Lo, I am coming soon! Says his spouse: Yes, come Lord."
+      },
+      christmasMorning: {
+        title: "Christmas Morning Hymn",
+        subtitle: "Sole che T'alzi nell'ombra di morte",
+        category: "seasonal",
+        season: "Christmas",
+        language: "Italian",
+        verses: [
+          "Sole che T'alzi nell'ombra di morte,\noggi Tu splendi alto sul creato\ne fai brillare su tutti i nostri volti\nla primitiva immagine divina.",
+          "Parola eterna che rifletti il Padre,\nsei l'uomo nuovo in una carne santa,\nil compimento di promesse antiche,\nla gioia e la salvezza della terra.",
+          "Agnello mite, nato da Maria,\nin Te la creazione è liberata:\nil cielo ha fatto pace con la terra\ne l'universo canta la tua gloria.",
+          "Per Te segnati con sigillo eterno\nsiamo rinati ormai a nuova vita\ne nella gioia d'esser resi figli\npossiam chiamare Dio col nome \"Padre\".",
+          "Emmanuele, dolce Dio vicino,\nche hai posto la tua tenda in mezzo a noi,\nin Te, che sei il \"sì\" senza riserva\nnoi rispondiamo a Dio il nostro \"Amen\"."
+        ],
+        translation: "1. Sun who rises in the shadow of death, today You shine high above creation and make our faces shine among everyone with the original divine image. 2. Eternal word who reflects the Father, You are the new man in a sacred flesh, the fulfilment of ancient promises, the joy and salvation of the earth. 3. Meek lamb born of Mary, in You creation is freed: heaven has made peace with earth and the universe sings Your glory. 4. For You who are marked with the eternal seal we are already reborn to new life, and in the joy of being made sons, we can call God with the name \"Father.\" 5. Emmanuel, sweet God-near-us, who have placed Your tent among us, in You who are the yes without reserve, we respond to God with our \"Amen.\""
+      },
+      christmasEvening: {
+        title: "Christmas Evening Hymn",
+        subtitle: "Per Te solo è chiara la notte",
+        category: "seasonal",
+        season: "Christmas",
+        language: "Italian",
+        verses: [
+          "Per Te solo è chiara la notte,\ne le tenebre son come luce,\ngenerato dal seno del Padre\nnell'eterno splendore dei cieli.",
+          "O Parola possente di Dio,\ntuo è il tempo, riempi ogni spazio,\nper Te il mondo è stato creato,\nTu sei l'alfa e l'omega di tutto.",
+          "Ineffabile grande Mistero!\nCanti il cielo ed esulti la terra:\noggi nasci da Vergine intatta\nrivestito di carne mortale.",
+          "Come un povero vieni tra noi,\ned il regno dei cieli ci annunci;\ndoni al mondo la vita di Dio,\nci redimi col prezzo del sangue.",
+          "Benedetta per sempre la terra,\nqual rugiada è disceso il perdono,\nnuovo amore si effonde su noi,\nadoriamo in silenzio il Mistero.",
+          "Per il Figlio che Tu ci hai donato,\nnello Spirito, fonte di vita,\na Te, Padre, sia gloria nei cieli,\ne sia pace agli uomini in terra. Amen."
+        ],
+        translation: "1. For You alone is the night clear and the shadows are like light, generated from the Father's womb in the eternal splendour of Heaven. 2. O mighty Word of God, Yours is time, You fill every space, for You the world was created, You are the Alpha and Omega of everything. 3. Great, ineffable mystery! The earth sings and exults to the sky: today You are born from a spotless Virgin, enrobed in mortal flesh. 4. You come among us like a poor child, announce the Kingdom of Heaven; You give the world God's life, redeem us with the price of Your blood. 5. The earth is blessed for ever! That descending dew is forgiveness, new love is poured out upon us: in silence let us adore the mystery! 6. For the Son You have given in the Spirit, spring of life, to You, Father, be glory in Heaven, and peace to men on earth."
+      },
+      lentMorning: {
+        title: "Lent Morning Hymn",
+        subtitle: "Sempre cantiamo al rifiorir del giorno",
+        category: "seasonal",
+        season: "Lent",
+        language: "Italian",
+        verses: [
+          "Sempre cantiamo al rifiorir del giorno,\nonnipotente Dio, le tue lodi:\nsei fonte di bontà, Tu sommo bene,\ne misericordioso nel perdono.",
+          "Con cuore aperto e colmo di fiducia,\ndinanzi a te, Signore, ci prostriamo:\nallora l'umiltà diviene luce,\nla via alla Verità a noi dischiude.",
+          "Nel nostro nulla solo in Te speriamo,\nin Te la vita è nella sua pienezza:\nla doni a noi per sempre nel Tuo Figlio,\nche nel suo grande amore s'è immolato.",
+          "Rifioriranno in Lui tutte le cose\nnel giorno della luce e della gloria;\nverrà quel giorno, lo celebreremo,\nun canto nuovo allora canteremo.",
+          "O Trinità, nel gaudio Ti adoriamo\no Luce indefettibile ed eterna,\ncon il perdono dona nuova vita\ne canteremo sempre le tue lodi. Amen."
+        ],
+        translation: "1. We always sing as a new day beings omnipotent God, Your praises: You are the highest good and fount of goodness and merciful in Your pardon. 2. With an open heart and full of confidence we fall down before You: thus the humility becomes light, which opens up to us the way toward truth. 3. In our nothingness we hope in You alone, in You there is fullness of life and this You give to us constantly in Your Son, who sacrificed himself in His great love. 4. All things will florish anew on that day of light and glory; this day will come and we will celebrate it, and we will sing a new song. 5. O Trinity, we joyfully adore You O indefectible and eternal light, with Your pardon You give us new life and we will always sing Your praises."
+      },
+      lentEvening: {
+        title: "Lent Evening Hymn",
+        category: "seasonal",
+        season: "Lent",
+        verses: [
+          "Freed at last from the burden of evil\nAnd baptised in the depths of cool waters,\nWe arrive at the land of our trials\nWhere our hearts will be made pure and clean.",
+          "From the slavery of Egypt You led us\nAnd You walk at our side through the desert,\nLeading all unto Your sacred mountain\nWhere erected on high is the cross.",
+          "You are water that flows from the rock,\nYou are manna to satiate our hunger,\nYou are cloud safely guiding our footsteps,\nYou are law to enlighten our hearts.",
+          "You are Rock that is risen among us,\nWhere we'll find sure defense and support,\nWhere we'll drink at the fountain of life\nThat will cleanse us from all of our sins.",
+          "In this new exodus You direct us\nOn the path to the great joys of Easter,\nPassing through from the clutches of death\nTo the Promised Land's gift of new life.\nAmen."
+        ]
+      },
+      easterMorning1: {
+        title: "Easter Morning Hymn (1)",
+        category: "seasonal",
+        season: "Easter",
+        verses: [
+          "The morn dawns refulgent with glory,\nThe heavens are vested in song,\nThe earth echoes forth hymns of gladness\nTo Christ, who has risen from death.",
+          "Death's power is vanquished by life,\nAnd sin has been washed clean by Love,\nAnd Christ in His glorious splendour\nIllumines the advent of morning.",
+          "The darkness of night has now broken,\nThe morn comes resplendent with light;\nOur souls overflowing with joy\nRejoice that in Him we are brothers.",
+          "May Christ show Himself in His glory\nTo us, as unto Mary Magdalene,\nHe'll come and call each one by name,\nThe Lord who was dead, but has risen.",
+          "Return, O Lord, to our path,\nYour words set ablaze in our hearts;\nOnce more in the Bread that is broken\nYour risen face will be revealed.",
+          "When into one body we gather,\nA new Guest appears in our midst;\nOur faith may He strengthen anew,\nRevealing His glorious wounds.",
+          "This day of our Easter rejoicing,\nOur innocence He will renew.\nAll glory to Christ, our Redeemer,\nTo Father and Spirit for ever. Amen."
+        ]
+      },
+      easterMorning2: {
+        title: "Easter Morning Hymn (2)",
+        subtitle: "O notte luminosa più del sole",
+        category: "seasonal",
+        season: "Easter",
+        language: "Italian",
+        verses: [
+          "O notte luminosa più del sole,\no notte più fulgente della luce,\nnotte pasquale tanto a lungo attesa,\nnotte nuziale tra la Chiesa e il Cristo.",
+          "Tu spogli l'avversario già sconfitto,\ninfrangi le catene della morte,\nrigeneri nel fonte nuove vite,\nerompe in Te il mistero dell'Amore.",
+          "La Luce, che in Te dissipa le tenebre,\nl'origine dei secoli precede;\ne dona trasparenza ad ogni cosa,\nin sé rinnova tutto l'universo.",
+          "La nostra Pasqua, Cristo, s'è immolato\ne dal suo Corpo, vero paradiso,\nè scaturito il fiume della vita,\nche il mondo intero lava dalla colpa.",
+          "Or l'uomo, riscattato dal peccato,\nun canto nuovo canta al suo Signore;\ned alla mensa accede dell'Agnello,\ncinte le vesti, pronto per il cielo.\nAmen."
+        ]
+      },
+      easterEvening: {
+        title: "Easter Evening Hymn",
+        subtitle: "Dal sangue dell'Agnello riscattati",
+        category: "seasonal",
+        season: "Easter",
+        language: "Italian",
+        verses: [
+          "Dal sangue dell'Agnello riscattati,\npurificate in Lui le nostre vesti,\nsalvati e resi nuovi dall'Amore,\na Te, Cristo Signor, diciamo lode.",
+          "Con Te, siamo saliti sulla croce,\ncon Te, nella tua morte battezzati;\nin Te noi siamo, Cristo, ormai risorti,\ne in seno al Padre ritroviamo vita.",
+          "O Cristo, è la tua vita immensa fonte\ndi gioia che zampilla eternamente:\nsplendore senza fine, in Te s'immerge\nl'umana piccolezza dei redenti.",
+          "Il nostro giorno scorre declinando:\nresta con noi, Signore, in questa sera,\ne la certezza della nostra fede\nillumini la notte che s'avanza.",
+          "Fa' che la nostra morte sia assorbita\ndalla luce gloriosa della Pasqua;\ne, morti ormai della tua stessa morte,\nviviamo in Te, che sei la nostra vita.",
+          "O Padre di bontà, Te lo chiediamo\nper mezzo di tuo Figlio, che è risorto,\ne per l'Amore eterno che ci guida\nverso la dolce luce del tuo volto. Amen."
+        ],
+        translation: "1. Rescued by the blood of the Lamb, our robes purified in Him, saved and made new by Love to You, Christ the Lord, we give praise. 2. With You we mounted the Cross, with You, baptised into Your death; in You, Christ, we are already risen, and in the womb of the Father we find life again. 3. O Christ, Your life is an immense source of joy that eternally gushes forth: splendour without end, the human smallness of the redeemed is immersed. 4. The day is winding down, remain with us, Lord, this evening, and may the certainty of our faith illumine the advancing night. 5. O let our death be absorbed by the glorious light of Easter; and, already dead in Your same death, we will live in You who are our life. 6. O Father of goodness, we ask You through Your Son, who is risen, and for the eternal Love who guides us toward the sweet light of Your face."
+      },
+      dedicatione: {
+        title: "In dedicatione Ecclesiae Maioris",
+        subtitle: "Christe, cunctorum dominator alme",
+        category: "special",
+        language: "Latin",
+        verses: [
+          "Christe, cunctorum dominator alme,\nmente supremi generate Patris,\nsupplicum voces pariterque carmen\ncerne benignus.",
+          "Cerne, quod Templi, Deus, ad decorem\nplebs tua supplex resonet per Aedem,\nannuo cuius redeunt colenda\ntempore festa.",
+          "Haec Domus surgit tibi dedicata\nrite, ubi sumit populus sacratum\nCorpus ex aris, bibit et beati\nSanguinis haustum.",
+          "Hic sacrosancti latices nocentum,\ndiluunt culpas, perimuntque noxas;\nchrismate invictum genus et creatur\nchristicolarum.",
+          "Hic salus aegris, medicina fessis,\nlumen et caecis datur: hic reatu,\nChriste, nos solvis; timor atque moeror\npellitur omnis.",
+          "Daemonis saevi perit hic rapina:\npervicax monstrum pavet, et retentos\ndeserens artus, fugit in remotas\nocius auras.",
+          "Hic locus Regis vocitatur aula\nnempe caelestis, rutilansque caeli\nporta, quae vitae Patriam petentes\naccipit omnes.",
+          "Turbo quem nullus quatit, aut vagantes\ndiruunt venti, penetrantque nimbi;\nhanc Domum tetris piceus tenebris\nTartarus horret.",
+          "Ergo te votis petimus sereno\nannuas vultu, famulos gubernes,\nqui tui summo celebrant amore\ngaudia templi.",
+          "Nulla nos vitae cruciet procella,\nsint dies laeti placidaeque noctes;\nnullus ex nobis, pereunte mundo,\nsentiat ignem.",
+          "Hic dies, in quo tibi consecratum,\nconspicis Templum, tribuat perenne\ngaudium nobis; vigeatque longo\ntemporis usu.",
+          "Laus poli summum resonet Parentem\nlaus, Patris Natum, pariterque Sanctum\nSpiritum dulci moduletur hymno\nomne per aevum. Amen."
+        ],
+        translation: "1. Christ, master of all and giver of life begotten of the Most High Father, look with favour on the prayers of those who humbly beseech You. 2. O God, look how Your prayerful people makes songs ring out in Your temple to honour the Church whose feast they gather to celebrate. 3. This house rises up and is rightly dedicated to You, here Your people receive from the altar Your consecrated body and drink of Your holy blood. 4. Here, the holy waters wash away the sins of those who have erred and wipe away their punishment, the invincible tribe of Christians is begotten and anointed. 5. Here, the sick are made healthy the weak find strength and sight is given to the blind; here, O Christ, You free us from all guilt every fear and sadness are cast away. 6. Here, the ferocious hold of the devil is broken, the stubborn beast is afraid as he releases those held captive he flees into the depths of the abyss. 7. This is the place truly known as the Court of the heavenly King, the shining gate of heaven that welcomes all those in search of life's homeland. 8. Winds cannot shake it, nor assail it nor storm clouds penetrate; dark creatures lurking in the shadows are terrified of this house. 9. Therefore, we beg You say yes to our prayers with serenity; watch over Your servants who celebrate the joys of Your temple with love. 10. Let no storm disturb our life; may our days be glad and our nights serene; may none of us know the fires of hell when the world perishes. 11. On this day when You look upon the temple dedicated to You, bestow Your joy on us for ever; may this temple remain steadfast for our use for many years to come. 12. Ring out joy to the Father on High and sing sweet songs of praise to the Father's Son together with the Holy Spirit for ages unending. Amen."
+      },
+      rosary: {
+        title: "The Rosary",
+        category: "prayers",
+        sections: [
+          {
+            title: "The Apostles' Creed",
+            text: "I believe in God,\nthe Father almighty,\nCreator of heaven and earth,\nand in Jesus Christ, his only Son, our Lord,\nwho was conceived by the Holy Spirit,\nborn of the Virgin Mary,\nsuffered under Pontius Pilate,\nwas crucified, died and was buried;\nHe descended into hell;\non the third day He rose again from the dead;\nHe ascended into heaven,\nand is seated at the right hand of God the Father almighty;\nfrom there He will come to judge the living and the dead.\nI believe in the Holy Spirit,\nthe holy catholic Church,\nthe communion of saints,\nthe forgiveness of sins,\nthe resurrection of the body,\nand life everlasting. Amen."
+          },
+          {
+            title: "Joyful Mysteries (Monday and Saturday)",
+            items: ["1. Annunciation", "2. Visitation", "3. Nativity", "4. Presentation at the Temple", "5. Finding in the Temple"]
+          },
+          {
+            title: "Light Mysteries (Thursday)",
+            items: ["1. Baptism of Jesus", "2. Wedding of Cana", "3. Proclamation of the Kingdom of God", "4. Transfiguration", "5. Institution of the Eucharist"]
+          },
+          {
+            title: "Sorrowful Mysteries (Tuesday and Friday)",
+            items: ["1. Agony of Jesus in the Garden", "2. Scourging of Jesus at Pillar", "3. Crowning with Thorns", "4. Carrying the Cross", "5. Crucifixion"]
+          },
+          {
+            title: "Glorious Mysteries (Wednesday and Sunday)",
+            items: ["1. Resurrection of Jesus", "2. Ascension of Jesus", "3. Descent of the Holy Spirit", "4. Assumption of the Virgin Mary", "5. Coronation of Blessed Virgin Mary"]
+          },
+          {
+            title: "Fatima Prayer",
+            text: "O my Jesus,\nforgive us our sins,\nsave us from the fires of hell,\nand lead all souls to Heaven,\nespecially those in most need of Your Mercy."
+          },
+          {
+            title: "Hail Holy Queen",
+            text: "Hail, holy Queen, Mother of Mercy!\nOur life, our sweetness, and our hope!\nTo thee do we cry, poor banished children of Eve;\nto thee do we send up our sighs,\nmourning and weeping in this valley, of tears.\nTurn, then, most gracious Advocate,\nthine eyes of mercy toward us;\nand after this our exile\nshow unto us the blessed fruit of thy womb, Jesus;\nO clement, O loving, O sweet Virgin Mary."
+          }
+        ]
+      },
+      prayerGiussani: {
+        title: "Prayer to Fr. Giussani",
+        category: "prayers",
+        verses: [
+          "O Merciful Father,\nwe thank You for having given Your Church and the world\nthe Servant of God Fr. Luigi Giussani.",
+          "He, with his life lived with passion,\ntaught us to know and love\nJesus Christ present here and now,\nto ask Him with humble certainty\nthat \"the beginning of every day be a yes to the Lord\nwho embraces us and makes fruitful\nthe soil of our heart\nfor the accomplishment of His work in the world,\nwhich is the victory over death and evil.\"",
+          "Grant, O Father,\nthrough the intercession of Fr. Giussani,\naccording to Your will,\nthe grace we implore,\nin the hope that he\nwill soon be numbered among Your saints.\nThrough Christ, our Lord.\nAmen."
+        ]
+      },
+      magnificat: {
+        title: "Magnificat",
+        subtitle: "Luke 1, 46–55",
+        category: "daily",
+        verses: [
+          "My soul glorifies the Lord, *\nmy spirit rejoices in God, my Saviour.",
+          "He looks on his servant in her lowliness *\nhenceforth all ages will call me blessed.",
+          "The Almighty works marvels for me. *\nHoly his name!",
+          "His mercy is from age to age, *\non those who fear him.",
+          "He puts forth his arm in strength *\nand scatters the proud-hearted.",
+          "He casts the mighty from their thrones *\nand raises the lowly.",
+          "He fills the starving with good things *\nsends the rich away empty.",
+          "He protects Israel, his servant, *\nremembering his mercy,",
+          "the mercy promised to our fathers, *\nto Abraham and his sons for ever."
+        ]
+      }
+    };
+
+    const categories = {
+      daily: { name: "Daily Prayers", icon: "☀️" },
+      weekly: { name: "Weekly Hymns", icon: "📅" },
+      night: { name: "Night Prayer", icon: "🌙" },
+      seasonal: { name: "Seasonal Hymns", icon: "🌿" },
+      prayers: { name: "Prayers & Devotions", icon: "🙏" },
+      special: { name: "Special Occasions", icon: "⭐" }
+    };
+
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    function getHymnsByCategory(cat) {
+      return Object.entries(hymnsData).filter(([key, hymn]) => hymn.category === cat);
+    }
+
+    function getWeeklyHymnsByDay(day) {
+      return Object.entries(hymnsData).filter(([key, hymn]) => 
+        hymn.category === 'weekly' && hymn.day === day
+      );
+    }
+
+    function createTile(key, hymn, categoryClass) {
+      const tile = document.createElement('button');
+      tile.className = `tile ${categoryClass}`;
+      tile.onclick = () => openHymn(key);
+      
+      let content = `<span class="tile-title">${hymn.title}</span>`;
+      if (hymn.subtitle) content += `<span class="tile-subtitle">${hymn.subtitle}</span>`;
+      if (hymn.language) content += `<span class="tile-language">${hymn.language}</span>`;
+      
+      tile.innerHTML = content;
+      return tile;
+    }
+
+    function createSmallTile(key, hymn, categoryClass) {
+      const tile = document.createElement('button');
+      tile.className = `tile tile-small ${categoryClass}`;
+      tile.onclick = () => openHymn(key);
+      
+      let content = `<span class="tile-time">${hymn.time}</span>`;
+      if (hymn.subtitle) content += `<span class="tile-tiny-subtitle">${hymn.subtitle}</span>`;
+      if (hymn.language) content += `<span class="tile-language">${hymn.language}</span>`;
+      
+      tile.innerHTML = content;
+      return tile;
+    }
+
+    function renderHome() {
+      const mainContent = document.getElementById('mainContent');
+      mainContent.innerHTML = '';
+
+      // Daily Prayers
+      const dailySection = document.createElement('section');
+      dailySection.className = 'section';
+      dailySection.innerHTML = `<h2 class="section-title"><span class="section-icon">${categories.daily.icon}</span>${categories.daily.name}</h2>`;
+      const dailyGrid = document.createElement('div');
+      dailyGrid.className = 'tiles-grid';
+      getHymnsByCategory('daily').forEach(([key, hymn]) => {
+        dailyGrid.appendChild(createTile(key, hymn, 'tile-daily'));
+      });
+      dailySection.appendChild(dailyGrid);
+      mainContent.appendChild(dailySection);
+
+      // Weekly Hymns by Day
+      const weeklySection = document.createElement('section');
+      weeklySection.className = 'section';
+      weeklySection.innerHTML = `<h2 class="section-title"><span class="section-icon">${categories.weekly.icon}</span>${categories.weekly.name}</h2>`;
+      
+      days.forEach(day => {
+        const dayHymns = getWeeklyHymnsByDay(day);
+        if (dayHymns.length > 0) {
+          const dayDiv = document.createElement('div');
+          dayDiv.className = 'day-section';
+          dayDiv.innerHTML = `<h3 class="day-title">${day}</h3>`;
+          const tilesRow = document.createElement('div');
+          tilesRow.className = 'tiles-row';
+          dayHymns.forEach(([key, hymn]) => {
+            tilesRow.appendChild(createSmallTile(key, hymn, 'tile-weekly'));
+          });
+          dayDiv.appendChild(tilesRow);
+          weeklySection.appendChild(dayDiv);
+        }
+      });
+      mainContent.appendChild(weeklySection);
+
+      // Night Prayer
+      const nightSection = document.createElement('section');
+      nightSection.className = 'section';
+      nightSection.innerHTML = `<h2 class="section-title"><span class="section-icon">${categories.night.icon}</span>${categories.night.name}</h2>`;
+      const nightGrid = document.createElement('div');
+      nightGrid.className = 'tiles-grid';
+      getHymnsByCategory('night').forEach(([key, hymn]) => {
+        nightGrid.appendChild(createTile(key, hymn, 'tile-night'));
+      });
+      nightSection.appendChild(nightGrid);
+      mainContent.appendChild(nightSection);
+
+      // Seasonal Hymns
+      const seasonalSection = document.createElement('section');
+      seasonalSection.className = 'section';
+      seasonalSection.innerHTML = `<h2 class="section-title"><span class="section-icon">${categories.seasonal.icon}</span>${categories.seasonal.name}</h2>`;
+      
+      ['Advent', 'Christmas', 'Lent', 'Easter'].forEach(season => {
+        const seasonHymns = Object.entries(hymnsData).filter(([key, hymn]) => 
+          hymn.category === 'seasonal' && hymn.season === season
+        );
+        if (seasonHymns.length > 0) {
+          const seasonDiv = document.createElement('div');
+          seasonDiv.className = 'day-section';
+          seasonDiv.innerHTML = `<h3 class="day-title">${season}</h3>`;
+          const tilesGrid = document.createElement('div');
+          tilesGrid.className = 'tiles-grid';
+          seasonHymns.forEach(([key, hymn]) => {
+            tilesGrid.appendChild(createTile(key, hymn, 'tile-seasonal'));
+          });
+          seasonDiv.appendChild(tilesGrid);
+          seasonalSection.appendChild(seasonDiv);
+        }
+      });
+      mainContent.appendChild(seasonalSection);
+
+      // Prayers & Devotions
+      const prayersSection = document.createElement('section');
+      prayersSection.className = 'section';
+      prayersSection.innerHTML = `<h2 class="section-title"><span class="section-icon">${categories.prayers.icon}</span>${categories.prayers.name}</h2>`;
+      const prayersGrid = document.createElement('div');
+      prayersGrid.className = 'tiles-grid';
+      getHymnsByCategory('prayers').forEach(([key, hymn]) => {
+        prayersGrid.appendChild(createTile(key, hymn, 'tile-prayers'));
+      });
+      prayersSection.appendChild(prayersGrid);
+      mainContent.appendChild(prayersSection);
+
+      // Special Occasions
+      const specialSection = document.createElement('section');
+      specialSection.className = 'section';
+      specialSection.innerHTML = `<h2 class="section-title"><span class="section-icon">${categories.special.icon}</span>${categories.special.name}</h2>`;
+      const specialGrid = document.createElement('div');
+      specialGrid.className = 'tiles-grid';
+      getHymnsByCategory('special').forEach(([key, hymn]) => {
+        specialGrid.appendChild(createTile(key, hymn, 'tile-special'));
+      });
+      specialSection.appendChild(specialGrid);
+      mainContent.appendChild(specialSection);
+    }
+
+    function openHymn(key) {
+      const hymn = hymnsData[key];
+      if (!hymn) return;
+
+      document.getElementById('homePage').classList.add('hidden');
+      document.getElementById('hymnPage').classList.add('active');
+
+      const content = document.getElementById('hymnContent');
+      let html = `
+        <header class="hymn-header">
+          <h1 class="hymn-title">${hymn.title}</h1>
+          ${hymn.subtitle ? `<p class="hymn-subtitle">${hymn.subtitle}</p>` : ''}
+          ${hymn.language ? `<span class="hymn-language">${hymn.language}</span>` : ''}
+          ${hymn.day && hymn.time ? `<p class="hymn-meta">${hymn.day} · ${hymn.time}</p>` : ''}
+          ${hymn.season ? `<p class="hymn-meta">${hymn.season}</p>` : ''}
+        </header>
+        <div class="hymn-body">
+      `;
+
+      if (hymn.antiphon) {
+        html += `
+          <div class="antiphon">
+            <span class="antiphon-label">Antiphon</span>
+            <p class="antiphon-text">${hymn.antiphon}</p>
+          </div>
+        `;
+      }
+
+      if (hymn.verses) {
+        html += '<div class="verses">';
+        hymn.verses.forEach(verse => {
+          html += `<p class="verse">${verse}</p>`;
+        });
+        html += '</div>';
+      }
+
+      if (hymn.sections) {
+        hymn.sections.forEach(section => {
+          html += `
+            <div class="rosary-section">
+              <h3 class="rosary-section-title">${section.title}</h3>
+              ${section.text ? `<p class="verse">${section.text}</p>` : ''}
+              ${section.items ? `<ul class="mystery-list">${section.items.map(item => `<li class="mystery-item">${item}</li>`).join('')}</ul>` : ''}
+            </div>
+          `;
+        });
+      }
+
+      if (hymn.translation) {
+        html += `
+          <div class="translation">
+            <span class="translation-label">Translation</span>
+            <p class="translation-text">${hymn.translation}</p>
+          </div>
+        `;
+      }
+
+      html += '</div>';
+      content.innerHTML = html;
+      window.scrollTo(0, 0);
+    }
+
+    function goHome() {
+      document.getElementById('homePage').classList.remove('hidden');
+      document.getElementById('hymnPage').classList.remove('active');
+      window.scrollTo(0, 0);
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', renderHome);
+  </script>
+</body>
+</html>
